@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workshop 1</title>
+
+  <script>
+    const completed = (e, countryCode) => {
+      const data = JSON.parse(e.target.responseText);
+      document.getElementById('code').innerHTML = `${countryCode.toUpperCase()}`;
+      document.getElementById('dolar').innerHTML = `$ ${data[countryCode]['usd']}`;
+      document.getElementById('euro').innerHTML = `€ ${data[countryCode]['eur']}`;
+    };
+
+    const error = () => console.log(this.responseText);
+
+    function getExchange() {
+      const countryCode = document.getElementById('countries').value;
+
+      const ajaxRequest = new XMLHttpRequest(); //AJAX
+      ajaxRequest.addEventListener("load", () => completed(event, countryCode));
+      ajaxRequest.addEventListener("error", error);
+      ajaxRequest.open("GET", `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${countryCode}.json`);
+      ajaxRequest.send();
+    }
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <div class="container">
+    <h2>Precios de Divisas</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Codigo País</th>
+          <th>Tipo Cambio Dólar</th>
+          <th>Tipo Cambio Euro</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="code"></td>
+          <td id="dolar">$ 0</td>
+          <td id="euro">€ 0</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <select name="countries" id="countries" onchange="getExchange();"></select>
+  </div>
+
+  <script>
+    const ajaxRequest = new XMLHttpRequest(); //AJAX
+    ajaxRequest.addEventListener("load", (e) => {
+
+      const data = JSON.parse(e.target.responseText);
+      const countries = data.countries;
+      let optionsHtml = "";
+      countries.forEach(country => {
+        optionsHtml += `<option value="${country.currency}">${country.name}</option>`;
+      });
+      document.getElementById("countries").innerHTML = optionsHtml;
+    });
+    ajaxRequest.addEventListener("error", () => { });
+    ajaxRequest.open("GET", "http://localhost:3001/paises");
+    ajaxRequest.send();
+  </script>
+</body>
+
+</html>
