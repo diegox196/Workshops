@@ -60,7 +60,7 @@
     ajaxRequest.addEventListener("load", (e) => {
 
       const data = JSON.parse(e.target.responseText);
-      const countries = data.countries;
+      const countries = data;
       let optionsHtml = "";
       countries.forEach(country => {
         optionsHtml += `<option value="${country.currency}">${country.name}</option>`;
