@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Administrar Cursos</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <h1>Administrar Cursos</h1>
+
+  <!-- Formulario para crear un nuevo curso -->
+  <h2>Crear Curso</h2>
+  <form id="create-course-form">
+    <label for="course-name">Nombre del curso:</label>
+    <input type="text" id="course-name" required>
+
+    <label for="course-credits">Creditos:</label>
+    <input type="number" id="course-credits" required>
+
+    <label for="course-teacher">Profesor:</label>
+    <select id="course-teacher"></select>
+
+    <button id="save-button">Crear Curso</button>
+  </form>
+
+  <!-- Sección para mostrar la lista de cursos -->
+  <h2>Lista de Cursos</h2>
+  <ul id="course-list"></ul>
+
+  <script src="script.js"></script>
+</body>
+</html>
