@@ -5,7 +5,7 @@ const Course = require("../models/courseModel");
  *
  * @param {*} req
  * @param {*} res
- */
+ */ 
 const courseGet = (req, res) => {
   // if an specific teacher is required
 
@@ -45,7 +45,6 @@ const courseGet = (req, res) => {
       });
   }
 };
-
 
 
 module.exports = {
